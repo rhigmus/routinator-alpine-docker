@@ -1,0 +1,14 @@
+services:
+  routinator:
+    image: nlnetlabs/routinator
+    networks:
+      routinator_macvlan:
+        ipv4_address: 10.10.51.20
+    volumes:
+      - /root/routinator_config_store/routinator.conf:/home/routinator/.routinator.conf
+    command: ["server"]
+    restart: unless-stopped
+
+networks:
+  routinator_macvlan:
+    external: true
