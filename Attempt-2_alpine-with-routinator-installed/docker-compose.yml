@@ -1,0 +1,14 @@
+services:
+  routinator:
+    build: .
+    container_name: routinator
+    networks:
+      routinator_macvlan:
+        ipv4_address: 10.10.51.20
+    volumes:
+      - /root/routinator_config_store/routinator.conf:/root/.routinator.conf
+    restart: unless-stopped
+
+networks:
+  routinator_macvlan:
+    external: true
