@@ -1,14 +1,10 @@
+# /root/Attempt-2_alpine-with-routinator-installed/docker-compose.yml
 services:
   routinator:
     build: .
     container_name: routinator
-    networks:
-      routinator_macvlan:
-        ipv4_address: 10.10.51.20
+    network_mode: "host"
     volumes:
       - /root/routinator_config_store/routinator.conf:/root/.routinator.conf
+      - /root/routinator_config_store/certs:/etc/routinator:ro
     restart: unless-stopped
-
-networks:
-  routinator_macvlan:
-    external: true
