@@ -5,6 +5,6 @@ services:
     container_name: routinator
     network_mode: "host"
     volumes:
-      - /root/routinator_config_store/routinator.conf:/root/.routinator.conf
-      - /root/routinator_config_store/certs:/etc/routinator:ro
+      - ./routinator_config_store/routinator.conf:/root/.routinator.conf
+      - ./routinator_config_store/certs:/etc/routinator:ro
     restart: unless-stopped
