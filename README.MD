@@ -116,14 +116,37 @@ docker compose up -d --build
 
 ---
 
-## 🔥 Firewall Configuration
+## 🛡 Firewall Configuration
 
-Allow access to the Routinator RTR and HTTPS ports:
-
+### ❗ Using `firewalld`:
 ```bash
 sudo firewall-cmd --permanent --add-port=8323/tcp
 sudo firewall-cmd --permanent --add-port=3323/tcp
 sudo firewall-cmd --reload
+```
+
+### ❗ Using `iptables`:
+
+```bash
+# Open ports 8323 and 3323 for TCP
+sudo iptables -I INPUT -p tcp --match multiport --dports 3323,8323 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+
+# Allow related/established response
+sudo iptables -I INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+# Save the rules:
+# Debian-based:
+sudo netfilter-persistent save
+
+# RHEL-based:
+sudo service iptables save
+```
+
+### ❗ Using `ufw` (Ubuntu):
+```bash
+sudo ufw allow 8323/tcp
+sudo ufw allow 3323/tcp
+sudo ufw reload
 ```
 
 ---
