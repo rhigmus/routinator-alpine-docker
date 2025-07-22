@@ -1,5 +1,5 @@
 # /root/Attempt-2_alpine-with-routinator-installed/Dockerfile
-### 🏗️ Stage 1: Build Routinator
+### -- Stage 1: Build Routinator
 FROM rust:1.82-alpine as builder
 
 ENV CARGO_HOME=/usr/local/cargo
@@ -11,7 +11,7 @@ RUN apk add --no-cache \
 
 RUN cargo install routinator
 
-### 🧼 Stage 2: Minimal Alpine runtime
+### -- Stage 2: Minimal Alpine runtime
 FROM alpine:latest
 
 RUN apk add --no-cache \
