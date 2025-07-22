@@ -132,7 +132,3 @@ sudo firewall-cmd --reload
 - **Verify container IP:** If not using host networking, check container’s IP and published ports.
 
 ---
-
-## 📄 License
-
-This project is released under the MIT License.
