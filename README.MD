@@ -90,11 +90,12 @@ sudo chmod +x /usr/local/bin/docker-compose
 ## 📦 Build & Run
 
 ```bash
-# (Optional) Relocate Docker build data
-sudo mkdir -p /srv/docker-tmp
+# (Optional) Relocate Docker build path
+sudo mkdir -p /srv/docker
 sudo systemctl stop docker
-sudo mv /var/lib/docker /srv/docker-tmp
-sudo ln -s /srv/docker-tmp /var/lib/docker
+sudo mkdir -p /etc/docker
+echo '{ "data-root": "/srv/docker" }' | sudo tee /etc/docker/daemon.json
+sudo systemctl daemon-reexec
 sudo systemctl start docker
 
 # Clone and build
