@@ -106,11 +106,9 @@ cp your.crt routinator_config_store/certs/routinator.crt
 cp your.key routinator_config_store/certs/routinator.key
 
 # Update the docker-compose.yml file and ensure the volumes are targeting the routinator_config_store
-```text
     volumes:
       - /root/routinator-alpine-docker/routinator_config_store/routinator.conf:/root/.routinator.conf
       - /root/routinator-alpine-docker/routinator_config_store/certs:/etc/routinator:ro
-```
 
 # Start container
 docker compose up -d --build
