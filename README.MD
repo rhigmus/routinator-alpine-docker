@@ -93,7 +93,6 @@ sudo chmod +x /usr/local/bin/docker-compose
 # (Optional) Relocate Docker build path
 sudo mkdir -p /srv/docker
 sudo systemctl stop docker
-sudo mkdir -p /etc/docker
 echo '{ "data-root": "/srv/docker" }' | sudo tee /etc/docker/daemon.json
 sudo systemctl daemon-reexec
 sudo systemctl start docker
@@ -105,6 +104,13 @@ cd routinator-alpine-docker
 # Copy your TLS cert/key to routinator_config_store/certs/
 cp your.crt routinator_config_store/certs/routinator.crt
 cp your.key routinator_config_store/certs/routinator.key
+
+# Update the docker-compose.yml file and ensure the volumes are targeting the routinator_config_store
+```text
+    volumes:
+      - /root/routinator-alpine-docker/routinator_config_store/routinator.conf:/root/.routinator.conf
+      - /root/routinator-alpine-docker/routinator_config_store/certs:/etc/routinator:ro
+```
 
 # Start container
 docker compose up -d --build
