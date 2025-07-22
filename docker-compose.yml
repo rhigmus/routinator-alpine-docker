@@ -1,4 +1,4 @@
-# /root/Attempt-2_alpine-with-routinator-installed/docker-compose.yml
+# ./docker-compose.yml
 services:
   routinator:
     build: .
